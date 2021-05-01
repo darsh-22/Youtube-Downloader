@@ -1,8 +1,8 @@
 from tkinter import *
-from tkinter import messagebox 
+from tkinter import messagebox
 from pytube import YouTube, Playlist
-from PIL import Image, ImageTk
 import re, os
+import time
 
 # basic window
 root = Tk()
@@ -13,10 +13,13 @@ root.title("YouTube Downloader")
 
 # minimum size in formate:- width, height
 root.minsize(1000,500)
+
 # maximum size in formate:- width, height
 root.maxsize(1000,500)
 
+# Download function 
 def download():
+    global MaxFileSize,fileSizeInBytes,DOWNLOAD_DIR
     user_link = linkvalue.get()
     user_path = pathvalue.get()
 
@@ -29,7 +32,7 @@ def download():
     print(f"link is: {user_link}")
     print(f"path is: {user_path}")
 
-    folder_name = "You Tube Downloader"
+    folder_name = "YouTube Downloader"
 
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
@@ -47,10 +50,11 @@ def download():
     if lst_regex:
         try:    
             playlist = Playlist(list_urls)
+            n = len(playlist.video_urls)
             for url in playlist.video_urls:
                 yt = YouTube(url)
                 print("Downloading...")
-                download = yt.streams.get_highest_resolution().download(output_path=DOWNLOAD_DIR)
+                yt.streams.get_highest_resolution().download(output_path=DOWNLOAD_DIR)
             messagebox.showinfo("Success",f"Downloaded video to this path {DOWNLOAD_DIR}")
         except Exception as e:
             raise Exception("Oops!! Something went wrong while downloading...")
@@ -60,20 +64,10 @@ def download():
             print("Downloading...")
             download = yt.streams.get_highest_resolution().download(output_path=DOWNLOAD_DIR)
             messagebox.showinfo("Success",f"Downloaded video to this path {DOWNLOAD_DIR}")
-
         except Exception as e:
             print(e)
             raise Exception("Oops!! Something went wrong while downloading...")
-<<<<<<< HEAD
 
-
-
-
-
-=======
-            
- 
->>>>>>> a03fb1681aa6b0aa1fea5af6639d09da89e06fa2
 # creating frames
 
 main_frame = Frame(root)
@@ -88,41 +82,22 @@ photo = PhotoImage(file = "img/logo.png")
 logo_img = Label(f2, image=photo)
 logo_img.pack()
 
-# for jpeg images
-# image = Image.open("img/logo.png")
-# photo = ImageTk.PhotoImage(image)
-# logo_img = Label(f2, image=photo)
-# logo_img.pack()
-
 # for Label 2
 f_label2 = Frame(main_frame)
 
 linkvalue = StringVar()
 pathvalue = StringVar()
 
-def click(*args):
-    link_entry.delete(0, 'end')
-    path_entry.delete(0, 'end')
 
 # for link
 Label(f_label2, text="Enter your Link here: ", padx = 2, pady = 15, font="comicansms 10 bold").grid()
 link_entry = Entry(f_label2 ,textvariable = linkvalue, bd = 1, bg = "white", width=100)
-# link_entry.insert(0, "Paste your link here...")
 link_entry.grid(row = 0, column = 1)
-<<<<<<< HEAD
-=======
-
->>>>>>> a03fb1681aa6b0aa1fea5af6639d09da89e06fa2
 
 # for path
 Label(f_label2, text="Enter your path here: ", padx = 2, pady = 15, font="comicansms 10 bold").grid(row = 1)
 path_entry = Entry(f_label2, textvariable = pathvalue, bd = 1, bg = "white", width=100)
-# path_entry.insert(0, "Paste your path here...")
 path_entry.grid(row = 1, column = 1)
-<<<<<<< HEAD
-=======
-
->>>>>>> a03fb1681aa6b0aa1fea5af6639d09da89e06fa2
 
 # packing label 2
 f_label2.pack(side = "top",anchor = "nw",padx = 112, pady = 10)
@@ -135,14 +110,12 @@ main_label = Label(f_label1, text="YouTube Downloader By Darshil Aslaliya", padx
 main_label.pack(fill = "x")
 f_label1.pack(side = BOTTOM,anchor = "ne", fill = X)
 
-Message(main_frame, text = "").pack()  
-
 # for button
 f3 = Frame(main_frame,borderwidth = 2,relief = "solid")
-f3.pack(pady = 45)
+f3.pack(pady = 80)
 
 # Download Button
-download_btn = Button(f3, text = "Download", font="comicansms 18 bold",height = 40, width = 50, command = download)
+download_btn = Button(f3, text = "Download", font="comicansms 18 bold",height = 40, width = 10, command = download)
 download_btn.pack()
 
 root.mainloop()
