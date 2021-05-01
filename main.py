@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox 
 from pytube import YouTube, Playlist
-from PIL import Image, ImageTk
+# from PIL import Image, ImageTk
 import re, os
 
 # basic window
@@ -65,6 +65,10 @@ def download():
         except Exception as e:
             print(e)
             raise Exception("Oops!! Something went wrong while downloading...")
+            
+    def click(*args):
+        link_entry.delete(0, 'end')
+        path_entry.delete(0, 'end')
 
 
 
@@ -102,12 +106,14 @@ Label(f_label2, text="Enter your Link here: ", padx = 2, pady = 15, font="comica
 link_entry = Entry(f_label2 ,textvariable = linkvalue, bd = 1, bg = "white", width=100)
 link_entry.insert(0, "Paste your link here...")
 link_entry.grid(row = 0, column = 1)
+link_entry.bind("<Button-1>", click)
 
 # for path
 Label(f_label2, text="Enter your path here: ", padx = 2, pady = 15, font="comicansms 10 bold").grid(row = 1)
 path_entry = Entry(f_label2, textvariable = pathvalue, bd = 1, bg = "white", width=100)
 path_entry.insert(0, "Paste your path here...")
 path_entry.grid(row = 1, column = 1)
+path_entry.bind("<Button-1>", click)
 
 # packing label 2
 f_label2.pack(side = "top",anchor = "nw",padx = 112, pady = 10)
