@@ -64,11 +64,16 @@ def download():
         except Exception as e:
             print(e)
             raise Exception("Oops!! Something went wrong while downloading...")
+<<<<<<< HEAD
 
 
 
 
 
+=======
+            
+ 
+>>>>>>> a03fb1681aa6b0aa1fea5af6639d09da89e06fa2
 # creating frames
 
 main_frame = Frame(root)
@@ -95,18 +100,29 @@ f_label2 = Frame(main_frame)
 linkvalue = StringVar()
 pathvalue = StringVar()
 
+def click(*args):
+    link_entry.delete(0, 'end')
+    path_entry.delete(0, 'end')
 
 # for link
 Label(f_label2, text="Enter your Link here: ", padx = 2, pady = 15, font="comicansms 10 bold").grid()
 link_entry = Entry(f_label2 ,textvariable = linkvalue, bd = 1, bg = "white", width=100)
 # link_entry.insert(0, "Paste your link here...")
 link_entry.grid(row = 0, column = 1)
+<<<<<<< HEAD
+=======
+
+>>>>>>> a03fb1681aa6b0aa1fea5af6639d09da89e06fa2
 
 # for path
 Label(f_label2, text="Enter your path here: ", padx = 2, pady = 15, font="comicansms 10 bold").grid(row = 1)
 path_entry = Entry(f_label2, textvariable = pathvalue, bd = 1, bg = "white", width=100)
 # path_entry.insert(0, "Paste your path here...")
 path_entry.grid(row = 1, column = 1)
+<<<<<<< HEAD
+=======
+
+>>>>>>> a03fb1681aa6b0aa1fea5af6639d09da89e06fa2
 
 # packing label 2
 f_label2.pack(side = "top",anchor = "nw",padx = 112, pady = 10)
