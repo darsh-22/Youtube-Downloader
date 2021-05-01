@@ -70,14 +70,23 @@ def download():
 
 # creating frames
 
+# main frame
 main_frame = Frame(root)
 main_frame.pack(fill = "x")
 
-#  for image
+# frame for Label 1
+f_label1 = Frame(main_frame,borderwidth = 1,relief = "solid")
+main_label = Label(f_label1, text="YouTube Downloader By Darshil Aslaliya", padx = 2, pady = 2,font="comicansms 16 bold")
+
+# packing label 1
+main_label.pack(fill = "x")
+f_label1.pack(side = BOTTOM,anchor = "ne", fill = X)
+
+#  frame for image
 f2 = Frame(main_frame)
 f2.pack(side = "top", anchor = "n", padx = 2, pady = 2)
 
-# Logo image
+# Logo 
 photo = PhotoImage(file = "img/logo.png")
 logo_img = Label(f2, image=photo)
 logo_img.pack()
@@ -88,13 +97,12 @@ f_label2 = Frame(main_frame)
 linkvalue = StringVar()
 pathvalue = StringVar()
 
-
-# for link
+# for link label and entry
 Label(f_label2, text="Enter your Link here: ", padx = 2, pady = 15, font="comicansms 10 bold").grid()
 link_entry = Entry(f_label2 ,textvariable = linkvalue, bd = 1, bg = "white", width=100)
 link_entry.grid(row = 0, column = 1)
 
-# for path
+# for path label and entry
 Label(f_label2, text="Enter your path here: ", padx = 2, pady = 15, font="comicansms 10 bold").grid(row = 1)
 path_entry = Entry(f_label2, textvariable = pathvalue, bd = 1, bg = "white", width=100)
 path_entry.grid(row = 1, column = 1)
@@ -102,15 +110,7 @@ path_entry.grid(row = 1, column = 1)
 # packing label 2
 f_label2.pack(side = "top",anchor = "nw",padx = 112, pady = 10)
 
-# for Label 1
-f_label1 = Frame(main_frame,borderwidth = 1,relief = "solid")
-main_label = Label(f_label1, text="YouTube Downloader By Darshil Aslaliya", padx = 2, pady = 2,font="comicansms 16 bold")
-
-# packing label 1
-main_label.pack(fill = "x")
-f_label1.pack(side = BOTTOM,anchor = "ne", fill = X)
-
-# for button
+# frame for button
 f3 = Frame(main_frame,borderwidth = 2,relief = "solid")
 f3.pack(pady = 80)
 
