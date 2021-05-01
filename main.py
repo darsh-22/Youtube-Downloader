@@ -1,3 +1,4 @@
+# required libraries
 from tkinter import *
 from tkinter import messagebox
 from pytube import YouTube, Playlist
@@ -19,38 +20,38 @@ root.maxsize(1000,500)
 
 # Download function 
 def download():
-    global MaxFileSize,fileSizeInBytes,DOWNLOAD_DIR
+
+    # user inputs
     user_link = linkvalue.get()
     user_path = pathvalue.get()
 
+    # required inputs
     if user_link == "":
         messagebox.showinfo("Required","Enter link to download...")
 
     elif user_path == "":
         messagebox.showinfo("Required","Enter path to download...")
 
+    # printing inputs
     print(f"link is: {user_link}")
     print(f"path is: {user_path}")
 
+    # initialize folder name
     folder_name = "YouTube Downloader"
 
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
 
-    # parent_dir = os.path.dirname(os.path.abspath(__file__))
-    parent_dir = user_path
-
-    DOWNLOAD_DIR =  os.path.join(parent_dir, folder_name)
+    # download directory
+    DOWNLOAD_DIR =  os.path.join(user_path, folder_name)
     print(DOWNLOAD_DIR)
 
-    list_urls = user_link
+    lst_regex = re.findall('^(https://youtube\.com/playlist\?list=){1}', user_link)
 
-    lst_regex = re.findall('^(https://youtube\.com/playlist\?list=){1}', list_urls)
-
+    # downloading playlist
     if lst_regex:
         try:    
-            playlist = Playlist(list_urls)
-            n = len(playlist.video_urls)
+            playlist = Playlist(user_link)
             for url in playlist.video_urls:
                 yt = YouTube(url)
                 print("Downloading...")
@@ -58,9 +59,11 @@ def download():
             messagebox.showinfo("Success",f"Downloaded video to this path {DOWNLOAD_DIR}")
         except Exception as e:
             raise Exception("Oops!! Something went wrong while downloading...")
+    
+    # download one single video
     else:
         try:
-            yt = YouTube(list_urls)
+            yt = YouTube(user_link)
             print("Downloading...")
             download = yt.streams.get_highest_resolution().download(output_path=DOWNLOAD_DIR)
             messagebox.showinfo("Success",f"Downloaded video to this path {DOWNLOAD_DIR}")
