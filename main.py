@@ -66,14 +66,7 @@ def download():
             print(e)
             raise Exception("Oops!! Something went wrong while downloading...")
             
-    def click(*args):
-        link_entry.delete(0, 'end')
-        path_entry.delete(0, 'end')
-
-
-
-
-
+ 
 # creating frames
 
 main_frame = Frame(root)
@@ -100,6 +93,9 @@ f_label2 = Frame(main_frame)
 linkvalue = StringVar()
 pathvalue = StringVar()
 
+def click(*args):
+    link_entry.delete(0, 'end')
+    path_entry.delete(0, 'end')
 
 # for link
 Label(f_label2, text="Enter your Link here: ", padx = 2, pady = 15, font="comicansms 10 bold").grid()
